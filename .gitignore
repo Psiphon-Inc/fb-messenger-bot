@@ -1,0 +1,9 @@
+# Exclude everything except index.js
+*
+!index.js# Exclude everything except index.js
+*
+!index.js# Exclude everything except index.js
+*
+!index.js
+!README.md
+!.gitignore
