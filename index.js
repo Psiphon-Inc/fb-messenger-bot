@@ -3,6 +3,7 @@
 // Imports dependencies and set up http server
 const
 
+  msg_template = require("./messages.json"),
   express = require('express'),
   bodyParser = require('body-parser'),
   fs = require('fs'),
@@ -137,6 +138,7 @@ var accessPath = "/v7.0/me/messages?access_token=" + accessToken;
 function handleMessage(sender_psid, received_message) {
 
   let response;
+  let text = received_message.text;
 
   if (received_message.quick_reply) {
 
@@ -144,24 +146,24 @@ function handleMessage(sender_psid, received_message) {
 
     return;
 
-  } else if (received_message.text) {
-
+  } else if (text == "Hi" || text == "Hello" || text == "hi" || text == "hello") {
+     console.log("recieved hi/hello");
      response = {
-          text: "Hello, welcome to the Psiphon Help Bot. How can we help you? Please use the options below to navigate through the features.",
+          text: msg_template.prompts.greeting,
           quick_replies: [
                 { content_type: "text",
-                  title: "Download Psiphon",
+                  title: msg_template.qk_replies.what,
+                  payload: "what-is-psiphon",
+                },
+                {
+                  content_type: "text",
+                  title: msg_template.qk_replies.download,
                   payload: "download-psiphon-1",
                 },
                 {
                   content_type: "text",
-                  title: "Cannot connect",
+                  title: msg_template.qk_replies.connect,
                   payload: "connection-problems-1",
-                },
-                {
-                  content_type: "text",
-                  title: "What is Psiphon?",
-                  payload: "what-is-psiphon",
                 }
               ],
           }
@@ -176,23 +178,23 @@ function handleMessage(sender_psid, received_message) {
             template_type: "generic",
             elements: [
               {
-              title: "Hello, welcome to the Psiphon Help Bot. What do you need help with? Please use the options below to navigate through the features.",
+              title: msg_template.prompts.greeting,
               image_url: attachment_url,
               buttons: [
                 {
                    type: "postback",
-                   title: "Cannot connect",
-                   payload: "connection-problems-1",
-                },
-                {
-                   type: "postback",
-                   title: "What is Psiphon?",
+                   title: msg_template.qk_replies.what,
                    payload: "what-is-psiphon",
                 },
                 {
+                   type: "postback",
+                   title: msg_template.qk_replies.download,
+                   payload: "download-psiphon-1",
+                },
+                {
                     type: "postback",
-                    title: "Send Feedback", 
-                    payload: "feedback",
+                    title: msg_template.qk_replies.connect, 
+                    payload: "connection-problems-1",
                 }
                ],
               }
@@ -201,7 +203,17 @@ function handleMessage(sender_psid, received_message) {
        }
      }
 
+  } else {
+
+  callSendAPI(sender_psid, {text : msg_template.qk_responses.error,
+                           quick_replies: [{content_type: "text",
+                                            title: "Options",
+                                            payload: "yes-help",},]
+                            });
+
+  return;
   }
+
   callSendAPI(sender_psid, response);
   return;
 }
@@ -216,25 +228,19 @@ function handlePostback(sender_psid, received_postback) {
  // Set the response based on the postback payload
  if (payload == 'download-psiphon-1') {
 
-  response = {text : "To download Psiphon, please visit this link https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/download.html "};
+  response = {text : msg_template.qk_responses["download-resp"]};
   callSendAPI(sender_psid, response);
   send2msgs(sender_psid, response);
 
- } else if (payload == 'feedback') {
+  } else if (payload == 'what-is-psiphon') {
 
-     response = { "text": "To send us feedback, please do so from within the Psiphon application, using the Send Feedback function." };
-     send2msgs(sender_psid, response);
-
- } else if (payload == 'what-is-psiphon') {
-
-     response = { "text": "Psiphon is a free, open source, circumvention tool from Psiphon Inc. that utilizes VPN, SSH and HTTP Proxy technology to provide you with uncensored access to Internet content. "};
-     let response3 = {text : "Your Psiphon client will automatically learn about new access points to maximize your chances of bypassing censorship. Psiphon is designed to provide you with open access to online content."};
-     let response4 = {text: "Psiphon does not increase your online privacy, and should not be considered or used as an online security tool. Read more: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/index.html ."};
-     send2msgs(sender_psid, new Array(response,response3,response4));
+     response = { text: msg_template.qk_responses["what-resp-1"]};
+     let response3 = {text : msg_template.qk_responses["what-resp-2"]};
+     send2msgs(sender_psid, new Array(response,response3));
 
  } else if (payload =='connection-problems-1') {
-     response = { "text": "Depending on network conditions, It may take several minutes to connect. Do not disconnect during this time." };
-     let response5 = {text: "If you continue to experience difficulty, see ‘Troubleshooting’ in our FAQ for more. https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/faq.html"};
+     response = { text : msg_template.qk_responses["connect-resp-1"]};
+     let response5 = {text: msg_template.qk_responses["connet-resp-2"]};
      send2msgs(sender_psid, new Array(response,response5));
  }
 
@@ -255,38 +261,32 @@ function handleQuickReply(sender_psid, received_message) {
 
   } else if (payload === 'no-help') {
 
-    response = {text : "We are happy to help. If you need help in the future, just send us a 'hello'. "};
+    response = {text : msg_template.prompts["end-msg"]};
 
     callSendAPI(sender_psid, response);
 
-  } else if (payload === 'download-psiphon-1') {
+  } else if (payload == 'what-is-psiphon') {
 
-    response = {text : "To download Psiphon, please visit this link https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/download.html "};
+    response = { text: msg_template.qk_responses["what-resp-1"]};
+    let response3 = {text : msg_template.qk_responses["what-resp-2"]};
+    send2msgs(sender_psid, new Array(response,response3));
+
+
+  } else if (payload == 'download-psiphon-1') {
+
+    response = { text: msg_template.qk_responses["download-resp"]};
     callSendAPI(sender_psid, response);
     send2msgs(sender_psid, response);
 
+  } else if (payload =='connection-problems-1') {
 
-  } else if (payload === 'feedback') {
-
-    response = { "text": "To send us feedback, please do so from within the Psiphon application, using the Send Feedback function." };
-    send2msgs(sender_psid, response);
-
-  } else if (payload === 'what-is-psiphon') {
-
-    response = { "text": "Psiphon is a free, open source, circumvention tool from Psiphon Inc. that utilizes VPN, SSH and HTTP Proxy technology to provide you with uncensored access to Internet content. "};
-    let response3 = {text : "Your Psiphon client will automatically learn about new access points to maximize your chances of bypassing censorship. Psiphon is designed to provide you with open access to online content."};
-    let response4 = {text: "Psiphon does not increase your online privacy, and should not be considered or used as an online security tool. Read more: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/index.html ."};
-    send2msgs(sender_psid, new Array(response,response3,response4));
-
-  } else if (payload ==='connection-problems-1') {
-
-    response = { text: "Depending on network conditions, It may take several minutes to connect. Do not disconnect during this time." };
-    let response5 = {text: "If you continue to experience difficulty, see ‘Troubleshooting’ in our FAQ for more. https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/faq.html"};
+    response = { text : msg_template.qk_responses["connect-resp-1"]};
+    let response5 = {text: msg_template.qk_responses["connet-resp-2"]};
     send2msgs(sender_psid, new Array(response5,response));
 
   } else {
 
-    callSendAPI(sender_psid, {text: "Sorry, I'm not programmed to understand that."} );
+    callSendAPI(sender_psid, {text: msg_template.qk_responses.error});
     sendMainMenu(sender_psid);
   }
 
@@ -299,21 +299,21 @@ function handleQuickReply(sender_psid, received_message) {
 function sendMainMenu(sender_psid) {
 
   let response = {
-    text: "Hello, welcome to the Psiphon Help Bot. What do you need help with? Please use the options below to navigate through the features.",
+    text: msg_template.prompts.greeting,
     quick_replies: [
           {content_type: "text",
-            title: "Download Psiphon",
+            title: msg_template.qk_replies.what,
+            payload: "what-is-psiphon",
+          },
+          {
+            content_type: "text",
+            title: msg_template.qk_replies.download,
             payload: "download-psiphon-1",
           },
           {
             content_type: "text",
-            title: "Cannot connect",
+            title: msg_template.qk_replies.connect,
             payload: "connection-problems-1",
-          },
-          {
-            content_type: "text",
-            title: "What is Psiphon?",
-            payload: "what-is-psiphon",
           }
         ],
     }
@@ -327,7 +327,7 @@ function send2msgs(sender_psid, response){
   let response2;
 
   response2 = {
-    text: "Can I help you with anything else?",
+    text: msg_template.prompts.help,
     quick_replies : [
         {
             content_type: "text",

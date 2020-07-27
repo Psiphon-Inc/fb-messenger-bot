@@ -1,0 +1,22 @@
+{
+    "prompts" : {
+        "greeting" : "Hello, welcome to the Psiphon Help Bot. Please select an option",
+        "end-msg" : "We are happy to help, If you need help in the future, just send us a 'hello'. ",
+        "help" : "Can I help you with anything else?"
+    },
+    "qk_replies" :{
+        "what" : "What is Psiphon",
+        "download" : "Download Psiphon",
+        "connect" : "I can't connect"
+
+    },
+    "qk_responses": {
+        "what-resp-1" : "Psiphon is a free, open source, circumvention tool from Psiphon Inc. that uses different tunneling and proxy technologies to provide you with uncensored access to internet content.",
+        "what-resp-2" : "Psiphon does not increase your online privacy, and should not be considered or used as an online security tool. Read more: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/index.html",
+        "download-resp" : "To download Psiphon, please visit this link: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/download.html",
+        "connect-resp-1" : "Depending on network conditions it may take several minutes to connect.  Do not disconnect at this time.  The Psiphon client automatically learns and tries different ways to connect and bypass censorship.",
+        "connet-resp-2" : "If you continue to experience difficulty, see ‘Troubleshooting’ in our FAQ for more: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/faq.html",
+        "error" : "Sorry, I don't understand that. Please click below for our options"
+    }
+
+}
