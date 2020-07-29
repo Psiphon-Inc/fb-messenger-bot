@@ -1,0 +1,9 @@
+version: '3'
+services: 
+  bot:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: fbbot
+    ports: 
+      - "3001:3001"

@@ -8,3 +8,5 @@
 !README.md
 !.gitignore
 !messages.json
+!docker-compose.yaml
+!Dockerfile
