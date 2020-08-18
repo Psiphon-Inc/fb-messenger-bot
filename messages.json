@@ -11,7 +11,7 @@
 
     },
     "qk_responses": {
-        "what-resp-1" : "The Psiphon app is a free, open source circumvention tool from Psiphon Inc. that is used by tens of millions of people every day. It utilizes customized VPN, SSH and HTTP/S Proxy technology to provide you with uncensored access to Internet content.",
+        "what-resp-1" : "The Psiphon app is a free, open source circumvention tool from Psiphon Inc. that is used by tens of millions of people every day. It utilizes unrivaled VPN, SSH and HTTP/S Proxy technology to provide you with uncensored access to Internet content",
         "what-resp-2" : "Psiphon does not increase your online privacy, and should not be considered or used as an online security tool. Read more: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/index.html",
         "download-resp" : "To download Psiphon, please visit this link: https://s3.amazonaws.com/psiphon/web/vaf4-b0fm-8qs5/en/download.html",
         "connect-resp-1" : "Depending on network conditions it may take several minutes to connect.  Do not disconnect at this time.  The Psiphon client automatically learns and tries different ways to connect and bypass censorship.",
