@@ -1,6 +1,6 @@
 'use strict';
 
-// Imports dependencies and set up http server
+// Imports dependencies and set up https server
 const
 
   msg_template = require("./messages.json"),
@@ -32,11 +32,14 @@ app.post('/webhook', (req, res) => {
 
       // Gets the message. entry.messaging is an array, but
       // will only ever contain one message, so we get index 0
+      // Gets the Sender ID to be able to send messages to them in messenger API	
 
       let webhook_event = entry.messaging[0];
 
       let sender_psid = webhook_event.sender.id;
 
+	    
+      // Handle Messenger API events	    
       if (webhook_event.message) {
 
           handleMessage(sender_psid, webhook_event.message);
@@ -85,7 +88,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-
+// Create the server to listen to webhook events on
 https.createServer({
 	key: fs.readFileSync('/etc/letsencrypt/live/test.cookierecipes.ml/privkey.pem'), 
 	cert: fs.readFileSync('/etc/letsencrypt/live/test.cookierecipes.ml/fullchain.pem') 
@@ -107,7 +110,7 @@ function callSendAPI(sender_psid, response) {
 var accessToken = process.env.ACCESSTOKEN;
 var accessPath = "/v7.0/me/messages?access_token=" + accessToken;
 
-
+// configure webhook options
  const options = {
      messaging_type : "RESPONSE",
      hostname: 'graph.facebook.com',
@@ -248,6 +251,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 
+// Function to handle Quick Replys - quick reply is a feature in messenger API
 
 function handleQuickReply(sender_psid, received_message) {
 
