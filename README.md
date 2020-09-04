@@ -1,7 +1,8 @@
 # fb-messenger-bot
 Code for the Psiphon Facebook Messenger Bot
 
-This is the index.js file used for the Psiphon Facebook messenger bot. All customization was done in this file. 
+This is the index.js and messages.json file used for the Psiphon Facebook messenger bot. All customization was done in these files.
+The messages.json file contains the responses, options and messages the bot can send to users. Index.js pulls from messages from this file. 
 
 Here are the instructions from Facebook on creating a Facebook Messenger bot: https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup 
 
