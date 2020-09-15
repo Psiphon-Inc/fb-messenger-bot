@@ -15,6 +15,7 @@ require('dotenv').config();
 let privkeyPath = process.env.PRIVKEYPATH;
 let certPemPath = process.env.CERTPEMPATH;
 let fullChainPem = process.env.FULLCHAINPEMPATH;
+let serverPort = process.env.PORT;
 
 const key = fs.readFileSync(privkeyPath);
 const cert = fs.readFileSync(certPemPath);
@@ -98,7 +99,7 @@ app.get('/webhook', (req, res) => {
 https.createServer({
     key: fs.readFileSync(privkeyPath),
     cert: fs.readFileSync(fullChainPem)
-}, app).listen(3001, function() {
+}, app).listen(serverPort, function() {
     console.log('The Server is open and we are listening');
 });
 
