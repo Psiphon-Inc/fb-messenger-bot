@@ -6,4 +6,4 @@ services:
       context: .
     container_name: fbbot
     ports: 
-      - "3001:3001"
+      - "${PORT}:${PORT}"
