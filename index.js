@@ -11,8 +11,8 @@ const
     app = express().use(bodyParser.json()); // creates express http server
 
 
-const key = fs.readFileSync('/etc/letsencrypt/live/test.cookierecipes.ml/privkey.pem');
-const cert = fs.readFileSync('/etc/letsencrypt/live/test.cookierecipes.ml/cert.pem');
+const key = fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/privkey.pem');
+const cert = fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/cert.pem');
 const creds = {
     key: key,
     cert: cert
@@ -92,8 +92,8 @@ app.get('/webhook', (req, res) => {
 
 // Create the server to listen to webhook events on
 https.createServer({
-    key: fs.readFileSync('/etc/letsencrypt/live/test.cookierecipes.ml/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/test.cookierecipes.ml/fullchain.pem')
+    key: fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/fullchain.pem')
 }, app).listen(3001, function() {
     console.log('The Server is open and we are listening');
 });
