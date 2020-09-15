@@ -10,15 +10,19 @@ const
     https = require('https'),
     app = express().use(bodyParser.json()); // creates express http server
 
+require('dotenv').config();
 
-const key = fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/privkey.pem');
-const cert = fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/cert.pem');
+let privkeyPath = process.env.PRIVKEYPATH;
+let certPemPath = process.env.CERTPEMPATH;
+let fullChainPem = process.env.FULLCHAINPEMPATH;
+
+const key = fs.readFileSync(privkeyPath);
+const cert = fs.readFileSync(certPemPath);
 const creds = {
     key: key,
     cert: cert
 };
 
-require('dotenv').config();
 
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
@@ -92,8 +96,8 @@ app.get('/webhook', (req, res) => {
 
 // Create the server to listen to webhook events on
 https.createServer({
-    key: fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/www.psifbbot.tk/fullchain.pem')
+    key: fs.readFileSync(privkeyPath),
+    cert: fs.readFileSync(fullChainPem)
 }, app).listen(3001, function() {
     console.log('The Server is open and we are listening');
 });
