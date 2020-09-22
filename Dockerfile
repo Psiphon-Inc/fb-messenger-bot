@@ -11,8 +11,8 @@ COPY .env /usr/src/app/.env
 COPY messages.json /usr/src/app/messages.json
 RUN npm install dotenv express body-parser
 
-ARG certPath
-ARG portNumber
+ARG CERTPATH
+ARG PORTNUMBER
 
 RUN mkdir -p ${CERTPATH}
 
