@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services: 
   bot:
     build:
@@ -7,3 +7,13 @@ services:
     container_name: fbbot
     ports: 
       - "${PORT}:${PORT}"
+    volumes:
+      - type: bind
+        source: ./privkey.pem
+        target: ${PRIVKEYPATH} 
+      - type: bind
+        source: ./cert.pem
+        target: ${CERTPEMPATH}
+      - type: bind
+        source: ./fullchain.pem
+        target: ${FULLCHAINPEMPATH}
