@@ -49,29 +49,55 @@ Your Facebook Messenger server needs a domain name. Get a domain name from a dom
 
 Update an A record for your domain so the domain you just obtained points to the public IP address of your Facebook Messenger Bot server. This is done on the domain registrar's website ususally. 
 
-It can take up to 48 hours for the DNS record to propogate, but is usually pretty quick. Once it has propogated, you need to obtain a certificate. You can get a certificate from Let's Encrypt for free. You may need to open port 80 on your server if it is not currently open. How to do this will depend on how you have configured your firewall rules. If you are using iptables to configure your firewall, you can run:
-
-`sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT`
+It can take up to 48 hours for the DNS record to propogate, but is usually pretty quick. Once it has propogated, you need to obtain a certificate. You can get a certificate from Let's Encrypt for free. You may need to open port 80 on your server if it is not currently open. 
 
 Now you can request the certificate from Let's Encrypt by running:
 
 `sudo certbot certonly --standalone`
 
-It is also possible that this command will be different depending on the OS you are running, Certbot provides instructions [here](https://certbot.eff.org/instructions). 
+It is possible that this command will be different depending on the OS you are running, Certbot provides instructions [here](https://certbot.eff.org/instructions). 
+
 Certificates should be created for your domain now. They will need to be renewed before 90 days when they expire. It is recommended to renew after 60 days.
-Close port 80 by deleting the iptables rule. To view all iptables rules:
-sudo iptables -L --line-numbers.
-Once you know which rule you want to delete from the list, note the chain and line number of the rule. Then run the iptables -D command followed by the chain and rule number. For example, if it were the rule in line 3 in the INPUT chain:
-sudo iptables -D INPUT 3
+
+When you are finished close port 80 if it is not needed.
+
+You can now define the variables `PRIVKEYPATH`, `CERTPEMPATH`, `FULLCHAINPEMPATH`, and `CERTPATH` in your .env file. 
+
+### Define port
+
+Choose the port you would like to use for your application, you will need to give the port to Facebook in order for Facebook to connect to your server. You will also need to give the .env file the PORT variable. 
+
+## Customization 
+
+You can customize the messages your bot will send by editing the `messages.json` file. This file contains the responses, options and messages that the bot can send to users.  `index.js` gets the messages from this file to send. 
+
+# Build 
+
+Once you have setup everything you will need to build your docker image. The Dockerfile uses two args. 
+
+## ARGS
+
+The Dockerfile uses the following: ARGS
+```
+PORTNUMBER
+CERTPATH
+```
+These must be passed to the Dockerfile as build args. Your chosen port will be PORTNUMBER and the path to your cert files will be CERTPATH. 
+
+To build: 
+```
+docker-compose build --build-arg PORTNUMBER={PORTNUMBER} --build-arg CERTPATH={CERTPATH}
+```
+
+# Docker-compose 
+
+Once you have built the image, you can run with:
+```
+docker-compose up 
+```
+or, if you would like to background the process: 
+```
+docker-compose up -d
+``` 
 
 
-This is the index.js and messages.json file used for the Psiphon Facebook messenger bot. All customization was done in these files.
-The messages.json file contains the responses, options and messages the bot can send to users. Index.js pulls from messages from this file. 
-
-Here are the instructions from Facebook on creating a Facebook Messenger bot: https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup 
-
-The messenger-webhook directory should be created, index.js should be cloned from this repository into messenger-webhook directory, then package.json and the express.js server can be downloaded following the instruction from the above link. 
-
-Some variables are defined in a .env file. The paths for various cert files, and port numbers used. There are two tokens used in this file for authentication of communication between this server and Facebook, these files have been extracted as the variables 'ACCESS_TOKEN' and 'WEB_TOKEN', these variables need to be defined in a .env file on the server. They are removed from the file for security purposes.  
-
-The Dockerfile uses two args: portNumber and certPath. These will need to be passed as --build-arg in the docker-compose build command. 
