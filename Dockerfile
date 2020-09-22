@@ -14,9 +14,9 @@ RUN npm install dotenv express body-parser
 ARG certPath
 ARG portNumber
 
-RUN mkdir -p ${certPath}
+RUN mkdir -p ${CERTPATH}
 
-EXPOSE ${portNumber}
+EXPOSE ${PORTNUMBER}
 
 CMD node index.js
 
