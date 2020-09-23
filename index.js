@@ -16,9 +16,15 @@ let privkeyPath = process.env.PRIVKEYPATH;
 let certPemPath = process.env.CERTPEMPATH;
 let fullChainPem = process.env.FULLCHAINPEMPATH;
 let serverPort = process.env.PORT;
+
 // Your verify token. Should be a random string.
 let VERIFY_TOKEN = process.env.WEBTOKEN;
 let accessToken = process.env.ACCESSTOKEN;
+
+//Facebook API URL to send POST requests to. 
+//hostNamePath can be changed for new versions of the API. 
+let hostNameFB = "graph.facebook.com";
+let hostNamePath = "/v7.0/me/messages?access_token=";
 
 
 
@@ -106,7 +112,7 @@ https.createServer({
 });
 
 
-// Sends response messages via the Send API by FaceBook
+// Sends messages of any type to user via the Send API by FaceBook
 function callSendAPI(sender_psid, response) {
 
     let request_body = {
@@ -117,12 +123,12 @@ function callSendAPI(sender_psid, response) {
     };
 
     // access path to make POST requests to - SendAPI URL
-    var accessPath = "/v7.0/me/messages?access_token=" + accessToken;
+    var accessPath = hostNamePath + accessToken;
 
     // configure webhook options
     const options = {
         messaging_type: "RESPONSE",
-        hostname: 'graph.facebook.com',
+        hostname: hostNameFB,
         path: accessPath,
         method: "POST",
         headers: {
@@ -274,6 +280,7 @@ function handlePostback(sender_psid, received_postback) {
 
 
 // Function to handle quick replies postbacks - the response sent after a user chooses one of our quick replies. 
+// Payloads are attributes in postback events used to identify which quick reply was chosen. 
 
 function handleQuickReply(sender_psid, received_message) {
 
@@ -335,7 +342,7 @@ function handleQuickReply(sender_psid, received_message) {
 }
 
 
-//main menu is a our core set of quick reply options.
+//Main menu is a our core set of quick reply options.
 function sendMainMenu(sender_psid) {
 
     let response = {
@@ -366,6 +373,7 @@ function sendMainMenu(sender_psid) {
 // A function that would allow us to send 2 or more messages at the same time.
 // This is so we don't send long paragraphs and can instead split into smaller easier to read strings. 
 // Timeout is used to ensure the messages are sent sequentially. 
+// Response is a required variable that can be an Array of messages (strings). 
 function send2msgs(sender_psid, response) {
 
     let response2;
