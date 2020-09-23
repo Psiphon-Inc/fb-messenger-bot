@@ -16,6 +16,11 @@ let privkeyPath = process.env.PRIVKEYPATH;
 let certPemPath = process.env.CERTPEMPATH;
 let fullChainPem = process.env.FULLCHAINPEMPATH;
 let serverPort = process.env.PORT;
+// Your verify token. Should be a random string.
+let VERIFY_TOKEN = process.env.WEBTOKEN;
+var accessToken = process.env.ACCESSTOKEN;
+
+
 
 const key = fs.readFileSync(privkeyPath);
 const cert = fs.readFileSync(certPemPath);
@@ -69,9 +74,6 @@ app.post('/webhook', (req, res) => {
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
-    // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = process.env.WEBTOKEN;
-
     // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -113,8 +115,6 @@ function callSendAPI(sender_psid, response) {
         },
         message: response,
     };
-
-    var accessToken = process.env.ACCESSTOKEN;
 
     // access path to make POST requests to - SendAPI URL
     var accessPath = "/v7.0/me/messages?access_token=" + accessToken;
