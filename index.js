@@ -123,7 +123,7 @@ function callSendAPI(sender_psid, response) {
     };
 
     // access path to make POST requests to - SendAPI URL
-    var accessPath = hostNamePath + accessToken;
+    let accessPath = hostNamePath + accessToken;
 
     // configure webhook options
     const options = {
@@ -392,7 +392,7 @@ function send2msgs(sender_psid, response) {
     }
 
     if (response.length != 1 || response.length != 0) {
-        var i;
+        let i;
 
         for (i = 0; i < response.length; i++) {
 
