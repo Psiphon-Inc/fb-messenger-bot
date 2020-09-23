@@ -37,9 +37,9 @@ You may not know yet what to put for these variables, that will be defined in th
 
 You will need a Facebook Page and a Facebook App. Information on obtaining these can be found in Facebook's documentation [here](https://developers.facebook.com/docs/messenger-platform/getting-started/app-setup). 
 
-You will get your ACCESSTOKEN from Facebook. Your Verify Token or WEBTOKEN is needed in this step as well, the Verify Token is explained in step 4 of [this](https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/) article. It is a random string of your choosing. 
+You will get your `ACCESSTOKEN` from Facebook. Your Verify Token or `WEBTOKEN` is needed in this step as well, the Verify Token is explained in step 4 of [this](https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/) article. It is a random string of your choosing. 
 
-The ACCESSTOKEN and WEBTOKEN variables can now be defined in your .env file. 
+The `ACCESSTOKEN` and `WEBTOKEN` variables can now be defined in your .env file. 
 
 Obtaining a domain name and certificates must be done along with setting up the Facebook App. 
 
@@ -49,7 +49,7 @@ Your Facebook Messenger server needs a domain name. Get a domain name from a dom
 
 Update an A record for your domain so the domain you just obtained points to the public IP address of your Facebook Messenger Bot server. This is done on the domain registrar's website ususally. 
 
-It can take up to 48 hours for the DNS record to propogate, but is usually pretty quick. Once it has propogated, you need to obtain a certificate. You can get a certificate from Let's Encrypt for free. You may need to open port 80 on your server if it is not currently open. 
+It can take up to 48 hours for the DNS record to propogate, but is usually pretty quick. Once it has propogated, you need to obtain a certificate. You can get a certificate from Let's Encrypt for free. You may need to open port 80 on your firewall if it is not currently open. 
 
 Now you can request the certificate from Let's Encrypt by running:
 
