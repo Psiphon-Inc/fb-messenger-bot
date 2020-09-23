@@ -18,7 +18,7 @@ let fullChainPem = process.env.FULLCHAINPEMPATH;
 let serverPort = process.env.PORT;
 // Your verify token. Should be a random string.
 let VERIFY_TOKEN = process.env.WEBTOKEN;
-var accessToken = process.env.ACCESSTOKEN;
+let accessToken = process.env.ACCESSTOKEN;
 
 
 
@@ -151,7 +151,10 @@ function handleMessage(sender_psid, received_message) {
 
     let response;
     let text = received_message.text;
-
+    
+    //use the quick reply function to handle these message postbacks. 
+    //Quick replies are a type of FB messenger button
+    
     if (received_message.quick_reply) {
 
         handleQuickReply(sender_psid, received_message.quick_reply);
@@ -213,7 +216,7 @@ function handleMessage(sender_psid, received_message) {
         }
 
     } else {
-
+        //If the message sent from the user is none of the above then we prompt to choose one of our quick replies
         callSendAPI(sender_psid, {
             text: msg_template.qk_responses.error,
             quick_replies: [{
@@ -270,7 +273,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 
-// Function to handle Quick Replys - quick reply is a feature in messenger API
+// Function to handle quick replies postbacks - the response sent after a user chooses one of our quick replies. 
 
 function handleQuickReply(sender_psid, received_message) {
 
@@ -332,7 +335,7 @@ function handleQuickReply(sender_psid, received_message) {
 }
 
 
-
+//main menu is a our core set of quick reply options.
 function sendMainMenu(sender_psid) {
 
     let response = {
@@ -359,6 +362,10 @@ function sendMainMenu(sender_psid) {
 
 }
 
+
+// A function that would allow us to send 2 or more messages at the same time.
+// This is so we don't send long paragraphs and can instead split into smaller easier to read strings. 
+// Timeout is used to ensure the messages are sent sequentially. 
 function send2msgs(sender_psid, response) {
 
     let response2;
