@@ -2,7 +2,6 @@
 
 // Imports dependencies and set up https server
 const
-
     msg_template = require("./messages.json"),
     express = require('express'),
     bodyParser = require('body-parser'),
@@ -12,19 +11,19 @@ const
 
 require('dotenv').config();
 
-let privkeyPath = process.env.PRIVKEYPATH;
-let certPemPath = process.env.CERTPEMPATH;
-let fullChainPem = process.env.FULLCHAINPEMPATH;
-let serverPort = process.env.PORT;
+const privkeyPath = process.env.PRIVKEYPATH;
+const certPemPath = process.env.CERTPEMPATH;
+const fullChainPem = process.env.FULLCHAINPEMPATH;
+const serverPort = process.env.PORT;
 
 // Your verify token. Should be a random string.
-let VERIFY_TOKEN = process.env.WEBTOKEN;
-let accessToken = process.env.ACCESSTOKEN;
+const VERIFY_TOKEN = process.env.WEBTOKEN;
+const accessToken = process.env.ACCESSTOKEN;
 
 //Facebook API URL to send POST requests to. 
 //hostNamePath can be changed for new versions of the API. 
-let hostNameFB = "graph.facebook.com";
-let hostNamePath = "/v7.0/me/messages?access_token=";
+const hostNameFB = "graph.facebook.com";
+const hostNamePath = "/v7.0/me/messages?access_token=";
 
 
 
@@ -39,7 +38,7 @@ const creds = {
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
 
-    let body = req.body;
+    const body = req.body;
 
     // Checks if this is an event from a page subscription
     if (body.object === 'page') {
@@ -51,9 +50,9 @@ app.post('/webhook', (req, res) => {
             // will only ever contain one message, so we get index 0
             // Gets the Sender ID to be able to send messages to sender in messenger API	
 
-            let webhook_event = entry.messaging[0];
+            const webhook_event = entry.messaging[0];
 
-            let sender_psid = webhook_event.sender.id;
+            const sender_psid = webhook_event.sender.id;
 
 
             // Handle Messenger API events	    
@@ -81,9 +80,9 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Parse the query params
-    let mode = req.query['hub.mode'];
-    let token = req.query['hub.verify_token'];
-    let challenge = req.query['hub.challenge'];
+    const mode = req.query['hub.mode'];
+    const token = req.query['hub.verify_token'];
+    const challenge = req.query['hub.challenge'];
 
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
@@ -115,7 +114,7 @@ https.createServer({
 // Sends messages of any type to user via the Send API by FaceBook
 function callSendAPI(sender_psid, response) {
 
-    let request_body = {
+    const request_body = {
         recipient: {
             id: sender_psid,
         },
@@ -123,7 +122,7 @@ function callSendAPI(sender_psid, response) {
     };
 
     // access path to make POST requests to - SendAPI URL
-    let accessPath = hostNamePath + accessToken;
+    const accessPath = hostNamePath + accessToken;
 
     // configure webhook options
     const options = {
@@ -139,7 +138,7 @@ function callSendAPI(sender_psid, response) {
 
     //send https request to messenger platform
 
-    const req = https.request(options, (res) => {
+    let req = https.request(options, (res) => {
         console.log('Status code:', res.statusCode);
     }).on("error", (err) => {
         console.log("error:", err.message);
@@ -190,7 +189,7 @@ function handleMessage(sender_psid, received_message) {
         }
     } else if (received_message.attachments) {
 
-        let attachment_url = received_message.attachments[0].payload.url;
+        const attachment_url = received_message.attachments[0].payload.url;
 
         response = {
             attachment: {
