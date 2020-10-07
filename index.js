@@ -25,8 +25,6 @@ const accessToken = process.env.ACCESSTOKEN;
 const hostNameFB = "graph.facebook.com";
 const hostNamePath = "/v7.0/me/messages?access_token=";
 
-
-
 const key = fs.readFileSync(privkeyPath);
 const cert = fs.readFileSync(certPemPath);
 const creds = {
