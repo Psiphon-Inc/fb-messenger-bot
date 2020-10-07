@@ -1,4 +1,4 @@
-# Exclude everything except index.js
+# Exclude everything except the below files.
 *
 !index.js
 !README.md
