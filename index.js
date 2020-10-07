@@ -17,7 +17,7 @@ const fullChainPem = process.env.FULLCHAINPEMPATH;
 const serverPort = process.env.PORT;
 
 // Your verify token. Should be a random string.
-const VERIFY_TOKEN = process.env.WEBTOKEN;
+const verifyToken = process.env.WEBTOKEN;
 const accessToken = process.env.ACCESSTOKEN;
 
 //Facebook API URL to send POST requests to. 
@@ -88,7 +88,7 @@ app.get('/webhook', (req, res) => {
     if (mode && token) {
 
         // Checks the mode and token sent is correct
-        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+        if (mode === 'subscribe' && token === verifyToken) {
 
             // Responds with the challenge token from the request
             console.log('WEBHOOK_VERIFIED');
