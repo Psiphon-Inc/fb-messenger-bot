@@ -187,7 +187,7 @@ function handleMessage(senderPsid, received_message) {
         }
     } else if (received_message.attachments) {
 
-        const attachment_url = received_message.attachments[0].payload.url;
+        const attachmentUrl = received_message.attachments[0].payload.url;
 
         response = {
             attachment: {
@@ -196,7 +196,7 @@ function handleMessage(senderPsid, received_message) {
                     template_type: "generic",
                     elements: [{
                         title: msgTemplate.prompts.greeting,
-                        image_url: attachment_url,
+                        image_url: attachmentUrl,
                         buttons: [{
                                 type: "postback",
                                 title: msgTemplate.qk_replies.what,
