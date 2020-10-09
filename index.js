@@ -2,7 +2,7 @@
 
 // Imports dependencies and set up https server
 const
-    msg_template = require("./messages.json"),
+    msgTemplate = require("./messages.json"),
     express = require('express'),
     bodyParser = require('body-parser'),
     fs = require('fs'),
@@ -167,20 +167,20 @@ function handleMessage(sender_psid, received_message) {
     } else if (text == "Hi" || text == "Hello" || text == "hi" || text == "hello") {
         console.log("recieved hi/hello");
         response = {
-            text: msg_template.prompts.greeting,
+            text: msgTemplate.prompts.greeting,
             quick_replies: [{
                     content_type: "text",
-                    title: msg_template.qk_replies.what,
+                    title: msgTemplate.qk_replies.what,
                     payload: "what-is-psiphon",
                 },
                 {
                     content_type: "text",
-                    title: msg_template.qk_replies.download,
+                    title: msgTemplate.qk_replies.download,
                     payload: "download-psiphon-1",
                 },
                 {
                     content_type: "text",
-                    title: msg_template.qk_replies.connect,
+                    title: msgTemplate.qk_replies.connect,
                     payload: "connection-problems-1",
                 }
             ],
@@ -195,21 +195,21 @@ function handleMessage(sender_psid, received_message) {
                 payload: {
                     template_type: "generic",
                     elements: [{
-                        title: msg_template.prompts.greeting,
+                        title: msgTemplate.prompts.greeting,
                         image_url: attachment_url,
                         buttons: [{
                                 type: "postback",
-                                title: msg_template.qk_replies.what,
+                                title: msgTemplate.qk_replies.what,
                                 payload: "what-is-psiphon",
                             },
                             {
                                 type: "postback",
-                                title: msg_template.qk_replies.download,
+                                title: msgTemplate.qk_replies.download,
                                 payload: "download-psiphon-1",
                             },
                             {
                                 type: "postback",
-                                title: msg_template.qk_replies.connect,
+                                title: msgTemplate.qk_replies.connect,
                                 payload: "connection-problems-1",
                             }
                         ],
@@ -221,7 +221,7 @@ function handleMessage(sender_psid, received_message) {
     } else {
         //If the message sent from the user is none of the above then we prompt to choose one of our quick replies
         callSendAPI(sender_psid, {
-            text: msg_template.qk_responses.error,
+            text: msgTemplate.qk_responses.error,
             quick_replies: [{
                 content_type: "text",
                 title: "Options",
@@ -247,7 +247,7 @@ function handlePostback(sender_psid, received_postback) {
     if (payload == 'download-psiphon-1') {
 
         response = {
-            text: msg_template.qk_responses["download-resp"]
+            text: msgTemplate.qk_responses["download-resp"]
         };
         callSendAPI(sender_psid, response);
         send2msgs(sender_psid, response);
@@ -255,19 +255,19 @@ function handlePostback(sender_psid, received_postback) {
     } else if (payload == 'what-is-psiphon') {
 
         response = {
-            text: msg_template.qk_responses["what-resp-1"]
+            text: msgTemplate.qk_responses["what-resp-1"]
         };
         let response3 = {
-            text: msg_template.qk_responses["what-resp-2"]
+            text: msgTemplate.qk_responses["what-resp-2"]
         };
         send2msgs(sender_psid, new Array(response, response3));
 
     } else if (payload == 'connection-problems-1') {
         response = {
-            text: msg_template.qk_responses["connect-resp-1"]
+            text: msgTemplate.qk_responses["connect-resp-1"]
         };
         let response5 = {
-            text: msg_template.qk_responses["connet-resp-2"]
+            text: msgTemplate.qk_responses["connet-resp-2"]
         };
         send2msgs(sender_psid, new Array(response, response5));
     }
@@ -292,7 +292,7 @@ function handleQuickReply(sender_psid, received_message) {
     } else if (payload === 'no-help') {
 
         response = {
-            text: msg_template.prompts["end-msg"]
+            text: msgTemplate.prompts["end-msg"]
         };
 
         callSendAPI(sender_psid, response);
@@ -300,10 +300,10 @@ function handleQuickReply(sender_psid, received_message) {
     } else if (payload == 'what-is-psiphon') {
 
         response = {
-            text: msg_template.qk_responses["what-resp-1"]
+            text: msgTemplate.qk_responses["what-resp-1"]
         };
         let response3 = {
-            text: msg_template.qk_responses["what-resp-2"]
+            text: msgTemplate.qk_responses["what-resp-2"]
         };
         send2msgs(sender_psid, new Array(response, response3));
 
@@ -311,7 +311,7 @@ function handleQuickReply(sender_psid, received_message) {
     } else if (payload == 'download-psiphon-1') {
 
         response = {
-            text: msg_template.qk_responses["download-resp"]
+            text: msgTemplate.qk_responses["download-resp"]
         };
         callSendAPI(sender_psid, response);
         send2msgs(sender_psid, response);
@@ -319,17 +319,17 @@ function handleQuickReply(sender_psid, received_message) {
     } else if (payload == 'connection-problems-1') {
 
         response = {
-            text: msg_template.qk_responses["connect-resp-1"]
+            text: msgTemplate.qk_responses["connect-resp-1"]
         };
         let response5 = {
-            text: msg_template.qk_responses["connet-resp-2"]
+            text: msgTemplate.qk_responses["connet-resp-2"]
         };
         send2msgs(sender_psid, new Array(response5, response));
 
     } else {
 
         callSendAPI(sender_psid, {
-            text: msg_template.qk_responses.error
+            text: msgTemplate.qk_responses.error
         });
         sendMainMenu(sender_psid);
     }
@@ -343,20 +343,20 @@ function handleQuickReply(sender_psid, received_message) {
 function sendMainMenu(sender_psid) {
 
     let response = {
-        text: msg_template.prompts.greeting,
+        text: msgTemplate.prompts.greeting,
         quick_replies: [{
                 content_type: "text",
-                title: msg_template.qk_replies.what,
+                title: msgTemplate.qk_replies.what,
                 payload: "what-is-psiphon",
             },
             {
                 content_type: "text",
-                title: msg_template.qk_replies.download,
+                title: msgTemplate.qk_replies.download,
                 payload: "download-psiphon-1",
             },
             {
                 content_type: "text",
-                title: msg_template.qk_replies.connect,
+                title: msgTemplate.qk_replies.connect,
                 payload: "connection-problems-1",
             }
         ],
@@ -376,7 +376,7 @@ function send2msgs(sender_psid, response) {
     let response2;
 
     response2 = {
-        text: msg_template.prompts.help,
+        text: msgTemplate.prompts.help,
         quick_replies: [{
             content_type: "text",
             title: "Yes",
