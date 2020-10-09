@@ -112,7 +112,7 @@ https.createServer({
 // Sends messages of any type to user via the Send API by FaceBook
 function callSendAPI(senderPsid, response) {
 
-    const request_body = {
+    const requestBody = {
         recipient: {
             id: senderPsid,
         },
@@ -142,7 +142,7 @@ function callSendAPI(senderPsid, response) {
         console.log("error:", err.message);
     });
 
-    req.write(JSON.stringify(request_body));
+    req.write(JSON.stringify(requestBody));
     console.log("sent the message!");
     req.end();
     return;
