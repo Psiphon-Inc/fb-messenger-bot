@@ -48,19 +48,19 @@ app.post('/webhook', (req, res) => {
             // will only ever contain one message, so we get index 0
             // Gets the Sender ID to be able to send messages to sender in messenger API	
 
-            const webhook_event = entry.messaging[0];
+            const webhookEvent = entry.messaging[0];
 
-            const sender_psid = webhook_event.sender.id;
+            const sender_psid = webhookEvent.sender.id;
 
 
             // Handle Messenger API events	    
-            if (webhook_event.message) {
+            if (webhookEvent.message) {
 
-                handleMessage(sender_psid, webhook_event.message);
+                handleMessage(sender_psid, webhookEvent.message);
 
-            } else if (webhook_event.postback) {
+            } else if (webhookEvent.postback) {
 
-                handlePostback(sender_psid, webhook_event.postback);
+                handlePostback(sender_psid, webhookEvent.postback);
             }
 
         });
