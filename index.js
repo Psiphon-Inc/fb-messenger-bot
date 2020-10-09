@@ -36,7 +36,7 @@ const creds = {
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
 
-    const body = req.body;
+    let body = req.body;
 
     // Checks if this is an event from a page subscription
     if (body.object === 'page') {
@@ -112,7 +112,7 @@ https.createServer({
 // Sends messages of any type to user via the Send API by FaceBook
 function callSendAPI(senderPsid, response) {
 
-    const requestBody = {
+    let requestBody = {
         recipient: {
             id: senderPsid,
         },
