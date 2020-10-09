@@ -50,17 +50,17 @@ app.post('/webhook', (req, res) => {
 
             const webhookEvent = entry.messaging[0];
 
-            const sender_psid = webhookEvent.sender.id;
+            const senderPsid = webhookEvent.sender.id;
 
 
             // Handle Messenger API events	    
             if (webhookEvent.message) {
 
-                handleMessage(sender_psid, webhookEvent.message);
+                handleMessage(senderPsid, webhookEvent.message);
 
             } else if (webhookEvent.postback) {
 
-                handlePostback(sender_psid, webhookEvent.postback);
+                handlePostback(senderPsid, webhookEvent.postback);
             }
 
         });
@@ -110,11 +110,11 @@ https.createServer({
 
 
 // Sends messages of any type to user via the Send API by FaceBook
-function callSendAPI(sender_psid, response) {
+function callSendAPI(senderPsid, response) {
 
     const request_body = {
         recipient: {
-            id: sender_psid,
+            id: senderPsid,
         },
         message: response,
     };
@@ -150,7 +150,7 @@ function callSendAPI(sender_psid, response) {
 
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
+function handleMessage(senderPsid, received_message) {
 
     let response;
     let text = received_message.text;
@@ -160,7 +160,7 @@ function handleMessage(sender_psid, received_message) {
     
     if (received_message.quick_reply) {
 
-        handleQuickReply(sender_psid, received_message.quick_reply);
+        handleQuickReply(senderPsid, received_message.quick_reply);
 
         return;
 
@@ -220,7 +220,7 @@ function handleMessage(sender_psid, received_message) {
 
     } else {
         //If the message sent from the user is none of the above then we prompt to choose one of our quick replies
-        callSendAPI(sender_psid, {
+        callSendAPI(senderPsid, {
             text: msgTemplate.qk_responses.error,
             quick_replies: [{
                 content_type: "text",
@@ -232,12 +232,12 @@ function handleMessage(sender_psid, received_message) {
         return;
     }
 
-    callSendAPI(sender_psid, response);
+    callSendAPI(senderPsid, response);
     return;
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+function handlePostback(senderPsid, received_postback) {
 
     let response;
     // Get the payload for the postback
@@ -249,8 +249,8 @@ function handlePostback(sender_psid, received_postback) {
         response = {
             text: msgTemplate.qk_responses["download-resp"]
         };
-        callSendAPI(sender_psid, response);
-        send2msgs(sender_psid, response);
+        callSendAPI(senderPsid, response);
+        send2msgs(senderPsid, response);
 
     } else if (payload == 'what-is-psiphon') {
 
@@ -260,7 +260,7 @@ function handlePostback(sender_psid, received_postback) {
         let response3 = {
             text: msgTemplate.qk_responses["what-resp-2"]
         };
-        send2msgs(sender_psid, new Array(response, response3));
+        send2msgs(senderPsid, new Array(response, response3));
 
     } else if (payload == 'connection-problems-1') {
         response = {
@@ -269,7 +269,7 @@ function handlePostback(sender_psid, received_postback) {
         let response5 = {
             text: msgTemplate.qk_responses["connet-resp-2"]
         };
-        send2msgs(sender_psid, new Array(response, response5));
+        send2msgs(senderPsid, new Array(response, response5));
     }
 
     return;
@@ -279,7 +279,7 @@ function handlePostback(sender_psid, received_postback) {
 // Function to handle quick replies postbacks - the response sent after a user chooses one of our quick replies. 
 // Payloads are attributes in postback events used to identify which quick reply was chosen. 
 
-function handleQuickReply(sender_psid, received_message) {
+function handleQuickReply(senderPsid, received_message) {
 
     let response;
 
@@ -287,7 +287,7 @@ function handleQuickReply(sender_psid, received_message) {
 
     if (payload === 'yes-help') {
 
-        sendMainMenu(sender_psid);
+        sendMainMenu(senderPsid);
 
     } else if (payload === 'no-help') {
 
@@ -295,7 +295,7 @@ function handleQuickReply(sender_psid, received_message) {
             text: msgTemplate.prompts["end-msg"]
         };
 
-        callSendAPI(sender_psid, response);
+        callSendAPI(senderPsid, response);
 
     } else if (payload == 'what-is-psiphon') {
 
@@ -305,7 +305,7 @@ function handleQuickReply(sender_psid, received_message) {
         let response3 = {
             text: msgTemplate.qk_responses["what-resp-2"]
         };
-        send2msgs(sender_psid, new Array(response, response3));
+        send2msgs(senderPsid, new Array(response, response3));
 
 
     } else if (payload == 'download-psiphon-1') {
@@ -313,8 +313,8 @@ function handleQuickReply(sender_psid, received_message) {
         response = {
             text: msgTemplate.qk_responses["download-resp"]
         };
-        callSendAPI(sender_psid, response);
-        send2msgs(sender_psid, response);
+        callSendAPI(senderPsid, response);
+        send2msgs(senderPsid, response);
 
     } else if (payload == 'connection-problems-1') {
 
@@ -324,14 +324,14 @@ function handleQuickReply(sender_psid, received_message) {
         let response5 = {
             text: msgTemplate.qk_responses["connet-resp-2"]
         };
-        send2msgs(sender_psid, new Array(response5, response));
+        send2msgs(senderPsid, new Array(response5, response));
 
     } else {
 
-        callSendAPI(sender_psid, {
+        callSendAPI(senderPsid, {
             text: msgTemplate.qk_responses.error
         });
-        sendMainMenu(sender_psid);
+        sendMainMenu(senderPsid);
     }
 
     return;
@@ -340,7 +340,7 @@ function handleQuickReply(sender_psid, received_message) {
 
 
 //Main menu is a our core set of quick reply options.
-function sendMainMenu(sender_psid) {
+function sendMainMenu(senderPsid) {
 
     let response = {
         text: msgTemplate.prompts.greeting,
@@ -362,7 +362,7 @@ function sendMainMenu(sender_psid) {
         ],
     }
 
-    callSendAPI(sender_psid, response);
+    callSendAPI(senderPsid, response);
 
 }
 
@@ -371,7 +371,7 @@ function sendMainMenu(sender_psid) {
 // This is so we don't send long paragraphs and can instead split into smaller easier to read strings. 
 // Timeout is used to ensure the messages are sent sequentially. 
 // Response is a required variable that can be an Array of messages (strings). 
-function send2msgs(sender_psid, response) {
+function send2msgs(senderPsid, response) {
 
     let response2;
 
@@ -393,11 +393,11 @@ function send2msgs(sender_psid, response) {
 
         for (i = 0; i < response.length; i++) {
 
-            callSendAPI(sender_psid, response[i]);
+            callSendAPI(senderPsid, response[i]);
 
         }
 
     }
 
-    setTimeout(() => callSendAPI(sender_psid, response2), 7000);
+    setTimeout(() => callSendAPI(senderPsid, response2), 7000);
 }
