@@ -135,7 +135,6 @@ function callSendAPI(senderPsid, response) {
     req.write(JSON.stringify(requestBody));
     console.log("sent the message!");
     req.end();
-    return;
 }
 
 // Handles messages events
