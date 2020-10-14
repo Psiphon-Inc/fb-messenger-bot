@@ -25,14 +25,6 @@ const accessToken = "EAAC4IXPjVzMBAMDMYbOu9OoK7vil6ctW9hkVWqOQBNndopDmbRKu6oFSm0
 const hostNameFB = "graph.facebook.com";
 const hostNamePath = "/v7.0/me/messages?access_token=";
 
-const key = fs.readFileSync(privkeyPath);
-const cert = fs.readFileSync(certPemPath);
-const creds = {
-    key: key,
-    cert: cert
-};
-
-
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
 
