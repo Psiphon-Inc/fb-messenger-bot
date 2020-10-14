@@ -233,7 +233,7 @@ function handlePostback(senderPsid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload == 'download-psiphon-1') {
+    if (payload === 'download-psiphon-1') {
 
         response = {
             text: msgTemplate.qk_responses["download-resp"]
@@ -241,7 +241,7 @@ function handlePostback(senderPsid, received_postback) {
         callSendAPI(senderPsid, response);
         send2msgs(senderPsid, response);
 
-    } else if (payload == 'what-is-psiphon') {
+    } else if (payload === 'what-is-psiphon') {
 
         response = {
             text: msgTemplate.qk_responses["what-resp-1"]
@@ -251,7 +251,7 @@ function handlePostback(senderPsid, received_postback) {
         };
         send2msgs(senderPsid, new Array(response, response3));
 
-    } else if (payload == 'connection-problems-1') {
+    } else if (payload === 'connection-problems-1') {
         response = {
             text: msgTemplate.qk_responses["connect-resp-1"]
         };
@@ -285,7 +285,7 @@ function handleQuickReply(senderPsid, received_message) {
 
         callSendAPI(senderPsid, response);
 
-    } else if (payload == 'what-is-psiphon') {
+    } else if (payload === 'what-is-psiphon') {
 
         response = {
             text: msgTemplate.qk_responses["what-resp-1"]
@@ -295,7 +295,7 @@ function handleQuickReply(senderPsid, received_message) {
         };
         send2msgs(senderPsid, new Array(response, response3));
 
-    } else if (payload == 'download-psiphon-1') {
+    } else if (payload === 'download-psiphon-1') {
 
         response = {
             text: msgTemplate.qk_responses["download-resp"]
@@ -303,7 +303,7 @@ function handleQuickReply(senderPsid, received_message) {
         callSendAPI(senderPsid, response);
         send2msgs(senderPsid, response);
 
-    } else if (payload == 'connection-problems-1') {
+    } else if (payload === 'connection-problems-1') {
 
         response = {
             text: msgTemplate.qk_responses["connect-resp-1"]
