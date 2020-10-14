@@ -55,7 +55,7 @@ app.post('/webhook', (req, res) => {
         });
 
         // Returns a '200 OK' response to all requests
-        res.status(200).send('EVENT_RECEIVED');
+        res.status(200).send("EVENT_RECEIVED");
     } else {
         // Returns a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
@@ -80,7 +80,7 @@ app.get('/webhook', (req, res) => {
         if (mode === 'subscribe' && token === verifyToken) {
 
             // Responds with the challenge token from the request
-            console.log('WEBHOOK_VERIFIED');
+            console.log("WEBHOOK_VERIFIED");
             res.status(200).send(challenge);
 
         } else {
@@ -96,7 +96,7 @@ https.createServer({
     key: fs.readFileSync(privkeyPath),
     cert: fs.readFileSync(fullChainPem)
 }, app).listen(serverPort, function() {
-    console.log('The Server is open and we are listening');
+    console.log("The Server is open and we are listening");
 });
 
 // Sends messages of any type to user via the Send API by FaceBook
@@ -126,8 +126,8 @@ function callSendAPI(senderPsid, response) {
     //send https request to messenger platform
 
     let req = https.request(options, (res) => {
-        console.log('Status code:', res.statusCode);
-        console.log('Status code message:', res.statusMessage);
+        console.log("Status code:", res.statusCode);
+        console.log("Status code message:", res.statusMessage);
     }).on("error", (err) => {
         console.log("error:", err.message);
     });
