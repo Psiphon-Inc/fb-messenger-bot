@@ -12,7 +12,6 @@ const
 require('dotenv').config();
 
 const privkeyPath = process.env.PRIVKEYPATH;
-const certPemPath = process.env.CERTPEMPATH;
 const fullChainPem = process.env.FULLCHAINPEMPATH;
 const serverPort = process.env.PORT;
 
