@@ -18,8 +18,8 @@ const serverPort = process.env.PORT;
 
 // Your verify token. Should be a random string.
 const verifyToken = process.env.WEBTOKEN;
-const accessToken = process.env.ACCESSTOKEN;
-
+//const accessToken = process.env.ACCESSTOKEN;
+const accessToken = "EAAC4IXPjVzMBAMDMYbOu9OoK7vil6ctW9hkVWqOQBNndopDmbRKu6oFSm0BYR7dIfGmlFIy4M0DtGytYwKaZC3ifiZC1QcXJlv2eagS6TBU79sVMJI4BJRGcCZAXUEfOoh4dPF7Pwv24bdjEhNy4ZBxgk6WiWw6pQRbEfJZBVbo2khKw9oWZBV";
 //Facebook API URL to send POST requests to. 
 //hostNamePath can be changed for new versions of the API. 
 const hostNameFB = "graph.facebook.com";
@@ -48,9 +48,9 @@ app.post('/webhook', (req, res) => {
             // will only ever contain one message, so we get index 0
             // Gets the Sender ID to be able to send messages to sender in messenger API	
 
-            const webhookEvent = entry.messaging[0];
+            let webhookEvent = entry.messaging[0];
 
-            const senderPsid = webhookEvent.sender.id;
+            let senderPsid = webhookEvent.sender.id;
 
 
             // Handle Messenger API events	    
@@ -81,9 +81,11 @@ app.get('/webhook', (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
-
+    
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
+
+        console.log("mode & token are confirmed");
 
         // Checks the mode and token sent is correct
         if (mode === 'subscribe' && token === verifyToken) {
@@ -138,6 +140,7 @@ function callSendAPI(senderPsid, response) {
 
     let req = https.request(options, (res) => {
         console.log('Status code:', res.statusCode);
+        console.log('Status code message:', res.statusMessage);
     }).on("error", (err) => {
         console.log("error:", err.message);
     });
@@ -185,6 +188,7 @@ function handleMessage(senderPsid, received_message) {
                 }
             ],
         }
+      console.info(response.quick_replies);
     } else if (received_message.attachments) {
 
         const attachmentUrl = received_message.attachments[0].payload.url;
@@ -342,7 +346,7 @@ function handleQuickReply(senderPsid, received_message) {
 //Main menu is a our core set of quick reply options.
 function sendMainMenu(senderPsid) {
 
-    let response = {
+    const response = {
         text: msgTemplate.prompts.greeting,
         quick_replies: [{
                 content_type: "text",
