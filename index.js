@@ -317,9 +317,6 @@ function handleQuickReply(senderPsid, received_message) {
         });
         sendMainMenu(senderPsid);
     }
-
-    return;
-
 }
 
 //Main menu is a our core set of quick reply options.
