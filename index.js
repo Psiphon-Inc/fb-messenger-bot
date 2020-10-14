@@ -264,7 +264,6 @@ function handlePostback(senderPsid, received_postback) {
 
 // Function to handle quick replies postbacks - the response sent after a user chooses one of our quick replies. 
 // Payloads are attributes in postback events used to identify which quick reply was chosen. 
-
 function handleQuickReply(senderPsid, received_message) {
 
     let response;
