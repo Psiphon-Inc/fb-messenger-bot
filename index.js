@@ -260,8 +260,6 @@ function handlePostback(senderPsid, received_postback) {
         };
         send2msgs(senderPsid, new Array(response, response5));
     }
-
-    return;
 }
 
 // Function to handle quick replies postbacks - the response sent after a user chooses one of our quick replies. 
