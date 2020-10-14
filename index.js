@@ -42,7 +42,6 @@ app.post('/webhook', (req, res) => {
             // Gets the Sender ID to be able to send messages to sender in messenger API	
             let senderPsid = webhookEvent.sender.id;
 
-
             // Handle Messenger API events	    
             if (webhookEvent.message) {
 
@@ -100,7 +99,6 @@ https.createServer({
     console.log('The Server is open and we are listening');
 });
 
-
 // Sends messages of any type to user via the Send API by FaceBook
 function callSendAPI(senderPsid, response) {
 
@@ -125,7 +123,6 @@ function callSendAPI(senderPsid, response) {
         },
     };
 
-
     //send https request to messenger platform
 
     let req = https.request(options, (res) => {
@@ -140,7 +137,6 @@ function callSendAPI(senderPsid, response) {
     req.end();
     return;
 }
-
 
 // Handles messages events
 function handleMessage(senderPsid, received_message) {
@@ -269,7 +265,6 @@ function handlePostback(senderPsid, received_postback) {
     return;
 }
 
-
 // Function to handle quick replies postbacks - the response sent after a user chooses one of our quick replies. 
 // Payloads are attributes in postback events used to identify which quick reply was chosen. 
 
@@ -301,7 +296,6 @@ function handleQuickReply(senderPsid, received_message) {
         };
         send2msgs(senderPsid, new Array(response, response3));
 
-
     } else if (payload == 'download-psiphon-1') {
 
         response = {
@@ -332,7 +326,6 @@ function handleQuickReply(senderPsid, received_message) {
 
 }
 
-
 //Main menu is a our core set of quick reply options.
 function sendMainMenu(senderPsid) {
 
@@ -359,7 +352,6 @@ function sendMainMenu(senderPsid) {
     callSendAPI(senderPsid, response);
 
 }
-
 
 // A function that would allow us to send 2 or more messages at the same time.
 // This is so we don't send long paragraphs and can instead split into smaller easier to read strings. 
@@ -390,7 +382,6 @@ function send2msgs(senderPsid, response) {
             callSendAPI(senderPsid, response[i]);
 
         }
-
     }
 
     setTimeout(() => callSendAPI(senderPsid, response2), 7000);
