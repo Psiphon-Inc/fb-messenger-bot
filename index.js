@@ -37,10 +37,9 @@ app.post('/webhook', (req, res) => {
 
             // Gets the message. entry.messaging is an array, but
             // will only ever contain one message, so we get index 0
-            // Gets the Sender ID to be able to send messages to sender in messenger API	
-
             let webhookEvent = entry.messaging[0];
-
+           
+            // Gets the Sender ID to be able to send messages to sender in messenger API	
             let senderPsid = webhookEvent.sender.id;
 
 
