@@ -228,13 +228,14 @@ function handleMessage(senderPsid, received_message) {
 // Handles messaging_postbacks events
 function handlePostback(senderPsid, received_postback) {
 
-    let response;
     // Get the payload for the postback
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
     if (payload === 'download-psiphon-1') {
 
+        let response;
+        
         response = {
             text: msgTemplate.qk_responses["download-resp"]
         };
