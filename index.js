@@ -17,10 +17,10 @@ const serverPort = process.env.PORT;
 
 // Your verify token. Should be a random string.
 const verifyToken = process.env.WEBTOKEN;
-//const accessToken = process.env.ACCESSTOKEN;
+// const accessToken = process.env.ACCESSTOKEN;
 const accessToken = "EAAC4IXPjVzMBAMDMYbOu9OoK7vil6ctW9hkVWqOQBNndopDmbRKu6oFSm0BYR7dIfGmlFIy4M0DtGytYwKaZC3ifiZC1QcXJlv2eagS6TBU79sVMJI4BJRGcCZAXUEfOoh4dPF7Pwv24bdjEhNy4ZBxgk6WiWw6pQRbEfJZBVbo2khKw9oWZBV";
-//Facebook API URL to send POST requests to. 
-//hostNamePath can be changed for new versions of the API. 
+// Facebook API URL to send POST requests to. 
+// hostNamePath can be changed for new versions of the API. 
 const hostNameFB = "graph.facebook.com";
 const hostNamePath = "/v7.0/me/messages?access_token=";
 
@@ -123,7 +123,7 @@ function callSendAPI(senderPsid, response) {
         },
     };
 
-    //send https request to messenger platform
+    // Send https request to messenger platform
 
     let req = https.request(options, (res) => {
         console.log("Status code:", res.statusCode);
@@ -143,8 +143,8 @@ function handleMessage(senderPsid, received_message) {
     let response;
     let text = received_message.text;
     
-    //use the quick reply function to handle these message postbacks. 
-    //Quick replies are a type of FB messenger button
+    // Use the quick reply function to handle these message postbacks. 
+    // Quick replies are a type of FB messenger button
     
     if (received_message.quick_reply) {
 
@@ -208,7 +208,7 @@ function handleMessage(senderPsid, received_message) {
         }
 
     } else {
-        //If the message sent from the user is none of the above then we prompt to choose one of our quick replies
+        // If the message sent from the user is none of the above then we prompt to choose one of our quick replies
         callSendAPI(senderPsid, {
             text: msgTemplate.qk_responses.error,
             quick_replies: [{
@@ -319,7 +319,7 @@ function handleQuickReply(senderPsid, received_message) {
     }
 }
 
-//Main menu is a our core set of quick reply options.
+// Main menu is a our core set of quick reply options.
 function sendMainMenu(senderPsid) {
 
     const response = {
