@@ -233,10 +233,8 @@ function handlePostback(senderPsid, received_postback) {
 
     // Set the response based on the postback payload
     if (payload === 'download-psiphon-1') {
-
-        let response;
         
-        response = {
+        let response = {
             text: msgTemplate.qk_responses["download-resp"]
         };
         callSendAPI(senderPsid, response);
@@ -244,7 +242,7 @@ function handlePostback(senderPsid, received_postback) {
 
     } else if (payload === 'what-is-psiphon') {
 
-        response = {
+        let response = {
             text: msgTemplate.qk_responses["what-resp-1"]
         };
         let response3 = {
@@ -253,7 +251,7 @@ function handlePostback(senderPsid, received_postback) {
         send2msgs(senderPsid, new Array(response, response3));
 
     } else if (payload === 'connection-problems-1') {
-        response = {
+        let response = {
             text: msgTemplate.qk_responses["connect-resp-1"]
         };
         let response5 = {
