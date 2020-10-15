@@ -377,5 +377,5 @@ function send2msgs(senderPsid, response) {
         }
     }
 
-    setTimeout(() => callSendAPI(senderPsid, response2), 7000);
+    setTimeout(() => callSendAPI(senderPsid, response2), 5000);
 }
