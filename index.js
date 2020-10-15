@@ -265,6 +265,7 @@ function handlePostback(senderPsid, received_postback) {
 // Payloads are attributes in postback events used to identify which quick reply was chosen. 
 function handleQuickReply(senderPsid, received_message) {
 
+    let response;
     let payload = received_message.payload;
 
     if (payload === 'yes-help') {
