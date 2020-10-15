@@ -245,19 +245,19 @@ function handlePostback(senderPsid, received_postback) {
         let response = {
             text: msgTemplate.qk_responses["what-resp-1"]
         };
-        let response3 = {
+        let response2 = {
             text: msgTemplate.qk_responses["what-resp-2"]
         };
-        send2msgs(senderPsid, new Array(response, response3));
+        send2msgs(senderPsid, new Array(response, response2));
 
     } else if (payload === 'connection-problems-1') {
         let response = {
             text: msgTemplate.qk_responses["connect-resp-1"]
         };
-        let response5 = {
+        let response3 = {
             text: msgTemplate.qk_responses["connet-resp-2"]
         };
-        send2msgs(senderPsid, new Array(response, response5));
+        send2msgs(senderPsid, new Array(response, response3));
     }
 }
 
@@ -285,10 +285,10 @@ function handleQuickReply(senderPsid, received_message) {
        let response = {
             text: msgTemplate.qk_responses["what-resp-1"]
         };
-        let response3 = {
+        let response2 = {
             text: msgTemplate.qk_responses["what-resp-2"]
         };
-        send2msgs(senderPsid, new Array(response, response3));
+        send2msgs(senderPsid, new Array(response, response2));
 
     } else if (payload === 'download-psiphon-1') {
 
@@ -303,10 +303,10 @@ function handleQuickReply(senderPsid, received_message) {
         let response = {
             text: msgTemplate.qk_responses["connect-resp-1"]
         };
-        let response5 = {
+        let response3 = {
             text: msgTemplate.qk_responses["connet-resp-2"]
         };
-        send2msgs(senderPsid, new Array(response5, response));
+        send2msgs(senderPsid, new Array(response3, response));
 
     } else {
 
@@ -350,9 +350,9 @@ function sendMainMenu(senderPsid) {
 // Response is a required variable that can be an Array of messages (strings). 
 function send2msgs(senderPsid, response) {
 
-    let response2;
+    let response5;
 
-    response2 = {
+    response5 = {
         text: msgTemplate.prompts.help,
         quick_replies: [{
             content_type: "text",
@@ -375,5 +375,5 @@ function send2msgs(senderPsid, response) {
         }
     }
 
-    setTimeout(() => callSendAPI(senderPsid, response2), 5000);
+    setTimeout(() => callSendAPI(senderPsid, response5), 5000);
 }
