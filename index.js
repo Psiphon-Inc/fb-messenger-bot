@@ -366,9 +366,8 @@ function send2msgs(senderPsid, response) {
     }
 
     if (response.length != 1 || response.length != 0) {
-        let i;
 
-        for (i = 0; i < response.length; i++) {
+        for (let i = 0; i < response.length; i++) {
 
             callSendAPI(senderPsid, response[i]);
 
