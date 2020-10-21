@@ -343,7 +343,7 @@ function sendMainMenu(senderPsid) {
 // A function that would allow us to send 2 or more messages at the same time.
 // This is so we don't send long paragraphs and can instead split into smaller easier to read strings. 
 // Timeout is used to ensure the messages are sent sequentially. 
-// Response is a required variable that can be an Array of messages (strings). 
+// Response is a required variable that must be be an Array of messages (strings). 
 function send2msgs(senderPsid, response) {
 
     let response3;
