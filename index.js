@@ -344,6 +344,7 @@ function sendMainMenu(senderPsid) {
 // This is so we don't send long paragraphs and can instead split into smaller easier to read strings. 
 // Timeout is used to ensure the messages are sent sequentially. 
 // Response is a required variable that must be be an Array of messages (strings). 
+// Adds message that asks user if they need more help5 seconds after the response is sent
 function send2msgs(senderPsid, response) {
 
     let response3;
