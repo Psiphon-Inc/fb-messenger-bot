@@ -209,18 +209,15 @@ function handleMessage(senderPsid, received_message) {
 
     } else {
         // If the message sent from the user is none of the above then we prompt to choose one of our quick replies
-        callSendAPI(senderPsid, {
+        response = {
             text: msgTemplate.qk_responses.error,
             quick_replies: [{
                 content_type: "text",
                 title: "Options",
                 payload: "yes-help",
             }, ]
-        });
-
-        return;
+        };    
     }
-
     callSendAPI(senderPsid, response);
     return;
 }
