@@ -262,7 +262,6 @@ function handlePostback(senderPsid, received_postback) {
 // Payloads are attributes in postback events used to identify which quick reply was chosen. 
 function handleQuickReply(senderPsid, received_message) {
 
-    let response;
     let payload = received_message.payload;
 
     if (payload === 'yes-help') {
@@ -289,7 +288,7 @@ function handleQuickReply(senderPsid, received_message) {
 
     } else if (payload === 'download-psiphon-1') {
 
-        response = {
+        let response = {
             text: msgTemplate.qk_responses["download-resp"]
         };
         callSendAPI(senderPsid, response);
