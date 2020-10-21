@@ -347,9 +347,16 @@ function sendMainMenu(senderPsid) {
 // Adds message that asks user if they need more help5 seconds after the response is sent
 function send2msgs(senderPsid, response) {
 
-    let response3;
+    if (response.length != 1 || response.length != 0) {
 
-    response3 = {
+        for (let i = 0; i < response.length; i++) {
+
+            callSendAPI(senderPsid, response[i]);
+
+        }
+    }
+
+       let response3 = {
         text: msgTemplate.prompts.help,
         quick_replies: [{
             content_type: "text",
@@ -361,15 +368,6 @@ function send2msgs(senderPsid, response) {
             payload: "no-help",
         }, ]
     }
-
-    if (response.length != 1 || response.length != 0) {
-
-        for (let i = 0; i < response.length; i++) {
-
-            callSendAPI(senderPsid, response[i]);
-
-        }
-    }
-
+    
     setTimeout(() => callSendAPI(senderPsid, response3), 5000);
 }
