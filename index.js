@@ -347,7 +347,7 @@ function sendMainMenu(senderPsid) {
 // Adds message that asks user if they need more help5 seconds after the response is sent
 function send2msgs(senderPsid, response) {
 
-    if (response.length != 1 || response.length != 0) {
+    if (response.length !== 1 || response.length !== 0) {
 
         for (let i = 0; i < response.length; i++) {
 
