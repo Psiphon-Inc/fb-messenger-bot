@@ -270,15 +270,11 @@ function handleQuickReply(senderPsid, received_message) {
         callSendAPI(senderPsid, response);
 
     } else if (payload === 'what-is-psiphon') {
-
-       let response = {
-            text: msgTemplate.qk_responses["what-resp-1"]
-        };
-        let response2 = {
-            text: msgTemplate.qk_responses["what-resp-2"]
-        };
-        send2msgs(senderPsid, new Array(response, response2));
-
+  
+        send2msgs(sender_psid, [
+            { text: msg_template.qk_responses["what-resp-1"] },
+            { text: msg_template.qk_responses["what-resp-2"] }
+        ]);
     } else if (payload === 'download-psiphon-1') {
 
         let response = {
@@ -289,13 +285,10 @@ function handleQuickReply(senderPsid, received_message) {
 
     } else if (payload === 'connection-problems-1') {
 
-        let response = {
-            text: msgTemplate.qk_responses["connect-resp-1"]
-        };
-        let response2 = {
-            text: msgTemplate.qk_responses["connet-resp-2"]
-        };
-        send2msgs(senderPsid, new Array(response2, response));
+       send2msgs(sender_psid, [
+            { text: msgTemplate.qk_responses["connect-resp-1"] },
+            { text: msgTemplate.qk_responses["connet-resp-2"] }
+        ]);
 
     } else {
 
