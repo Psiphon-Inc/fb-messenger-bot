@@ -152,7 +152,7 @@ function handleMessage(senderPsid, received_message) {
 
         return;
 
-    }  else if (text == "Hi" || text == "Hello" || text == "hi" || text == "hello") {
+    }  else if (received_message.text && ["HI", "HELLO"].includes(text.toUpperCase())) {
         console.log("recieved hi/hello");
         response = {
             text: msgTemplate.prompts.greeting,
