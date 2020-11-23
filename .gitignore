@@ -1,0 +1,10 @@
+# Exclude everything except the below files.
+*
+!index.js
+!README.md
+!.gitignore
+!docker-compose.yaml
+!Dockerfile
+!package-lock.json
+!package.json
+!template-messages.json

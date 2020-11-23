@@ -1,0 +1,23 @@
+{
+    "prompts" : {
+        "greeting" : "Hello, welcome to the Facebook Help Bot. Please select an option.",
+        "end-msg" : "We are happy to help. If you need help in the future, just send us a 'hello'. ",
+        "help" : "Can I help you with anything else?"
+    },
+    "qk_replies" :{
+        "what" : "What is this app?",
+        "download" : "Download app.",
+        "connect" : "I can't connect."
+
+    },
+    "qk_responses": {
+        "what-resp-1" : "What message part 1.",
+        "what-resp-2" : "What message part 2.",
+        "download-resp" : "To download this app, please visit this link: link.",
+        "connect-resp-1" : "Connect help message part 1.",
+        "connect-resp-2" : "Connect help message part 2.",
+        "error" : "Sorry, I don't understand that. Please click below for our options."
+    }
+
+}
+
