@@ -182,39 +182,6 @@ function handleMessage(senderPsid, received_message) {
             ],
         }
       console.info(response.quick_replies);
-    } else if (received_message.attachments) {
-
-        const attachmentUrl = received_message.attachments[0].payload.url;
-
-        response = {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    elements: [{
-                        title: msgTemplate.prompts.greeting,
-                        image_url: attachmentUrl,
-                        buttons: [{
-                                type: "postback",
-                                title: msgTemplate.qk_replies.what,
-                                payload: "what-is-psiphon",
-                            },
-                            {
-                                type: "postback",
-                                title: msgTemplate.qk_replies.download,
-                                payload: "download-psiphon-1",
-                            },
-                            {
-                                type: "postback",
-                                title: msgTemplate.qk_replies.connect,
-                                payload: "connection-problems-1",
-                            }
-                        ],
-                    }]
-                }
-            }
-        }
-
     } else {
         // If the message sent from the user is none of the above then we prompt them to select "Options" to receive the "Options" menu. 
         response = {
