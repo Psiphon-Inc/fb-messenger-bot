@@ -9,11 +9,11 @@ services:
       - "${PORT}:${PORT}"
     volumes:
       - type: bind
-        source: ./privkey.pem
+        source: /etc/letsencrypt/live/www.psifbbot.tk/privkey.pem
         target: ${PRIVKEYPATH} 
       - type: bind
-        source: ./cert.pem
+        source: /etc/letsencrypt/live/www.psifbbot.tk/cert.pem
         target: ${CERTPEMPATH}
       - type: bind
-        source: ./fullchain.pem
+        source: /etc/letsencrypt/live/www.psifbbot.tk/fullchain.pem
         target: ${FULLCHAINPEMPATH}
