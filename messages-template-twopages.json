@@ -1,0 +1,64 @@
+{
+    "prompts" : {
+
+        "eng" :   {
+            "greeting" : "Hello, welcome to the Facebook Help Bot. Please select an option.",
+            "end-msg" : "We are happy to help. If you need help in the future, just send us a 'hello'. ",
+            "help" : "Can I help you with anything else?"
+        },
+        "esp": {
+            "greeting": "Hola, bienvenido al bot de ayuda de Facebook. Por favor seleccione una opción",
+            "end-msg": "Estamos encantados de ayudarle. Si necesita ayuda en el futuro, simplemente envíenos un ‘hola’.",
+            "help": "¿Puedo ayudarte con cualquier otra cosa?"
+        },
+    },
+        "yesno" : {
+    	    "eng": {
+		    "yes-help" : "Yes",
+		    "no-help" : "No",
+		    "options" : "Options"
+	    },
+	    "esp": {
+		    "yes-help" : "Sí",
+		    "no-help" : "No",
+		    "options" : "opciones"
+	    },
+
+    },
+    "qk_replies" :{
+        "eng" : {
+            "what" : "What is this app?",
+            "download" : "Download app.",
+            "connect" : "I can't connect."},
+        "esp": {
+            "what": "¿Qué es esta aplicación?",
+            "download": "Descargar la aplicación",
+            "connect": "No puedo conectarme"
+        }
+
+    },
+    "qk_responses": {
+
+        "eng" : {
+            "what-resp-1" : "What Message Part 1",
+            "what-resp-2" : "What Message Part 2",
+            "download-resp" : "To download Psiphon, please visit this link: link",
+            "connect-resp-1" : "Connect Help Message Part 1",
+            "connect-resp-2" : "Connect help message part 2",
+            "error" : "Sorry, I don't understand that. Please click below for our options."
+        },
+
+        "esp": {
+            "what-resp-1": "Spanish What message part 1",
+            "what-resp-2": "Spanish What message part 2",
+            "download-resp": "Para descargar esta aplicación, por favor visite este enlace: link",
+            "connect-resp-1": "Spanish connect help message part 1",
+            "connect-resp-2": "Spanish connect help message part 2",
+            "error": "Lo siento, no lo entiendo. Por favor, haga clic a continuación para nuestras opciones."
+
+        },
+
+    }
+
+}
+
