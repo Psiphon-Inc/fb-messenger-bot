@@ -100,4 +100,13 @@ or, if you would like to background the process:
 docker-compose up -d
 ``` 
 
+---
+
+# Optional:
+
+It is possible to use the same messenger bot for two or more Facebook pages in different languages. 
+Included in the repo are two optional files: twoPages_index.js & messages-templates-twopages.json. The templates use an English page and Spanish second page as examples. 
+
+If you wanted to use the same bot on two pages, you should substitute these two files for the index.js and messages-template.json files in the setup steps. 
+You will also need to log into the messenger bot app dashboard on the Facebook developer website and navigate to the Messenger settings. From here you will have to add subscriptions for each additional page you want the app to work with.
 
